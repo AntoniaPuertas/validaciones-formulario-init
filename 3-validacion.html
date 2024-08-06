@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validación de Formulario</title>
-    <link rel="stylesheet" href="css/estilos2.css">
+    <link rel="stylesheet" href="css/estilos3.css">
 </head>
 <body>
+    <!-- Agregar dos inputs: fecha de nacimiento y teléfono -->
     <div class="container">
         <h2>Formulario de Registro</h2>
+        <p>Se añaden campos: fecha de nacimiento y número de teléfono</p>
         <form id="registroForm">
             <div class="form-group">
                 <label for="nombre">Nombre*:</label>
@@ -19,6 +21,16 @@
                 <label for="email">Email*:</label>
                 <input type="email" id="email" name="email" required>
                 <div class="error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                <div class="error" id="fechaNacimientoError"></div>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+                <div class="error" id="telefonoError"></div>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña*:</label>
@@ -35,6 +47,6 @@
         </form>
     </div>
 
-    <script src="js/2-validacion.js"></script>
+    <script src="js/3-validacion.js"></script>
 </body>
 </html>

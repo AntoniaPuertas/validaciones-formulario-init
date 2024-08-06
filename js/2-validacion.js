@@ -3,9 +3,13 @@ function validarNombre(){
     let nombreErrorTxt = document.getElementById('nombreError');
     if(nombreTxt.trim().length < 3){
         nombreErrorTxt.textContent = 'El nombre debe tener al menos 3 caracteres.';
+        document.getElementById('nombre').classList.add('error-input');
+        document.getElementById('nombre').classList.remove('success');
         return false;
     }else{
         nombreErrorTxt.textContent = '';
+        document.getElementById('nombre').classList.add('success');
+        document.getElementById('nombre').classList.remove('error-input');
         return true;
     }
 }
@@ -17,9 +21,13 @@ function validarEmail(){
     let emailRegex = new RegExp('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}');
 
     if(emailRegex.test(emailTxt.trim())){
+        document.getElementById('email').classList.add('success');
+        document.getElementById('email').classList.remove('error-input');
         emailErrorTxt.textContent = '';
     }else{
         esCorrecto = false;
+        document.getElementById('email').classList.remove('success');
+        document.getElementById('email').classList.add('error-input');
         emailErrorTxt.textContent = 'Por favor, introduce un email válido.';
     }
     return esCorrecto;
@@ -28,10 +36,14 @@ function validarEmail(){
 function validarPassword(){
     let passwordTxt = document.getElementById('password').value;
     let passwordErrorTxt = document.getElementById('passwordError');
-    if(passwordTxt.trim() < 6){
+    if(passwordTxt.trim().length < 6){
+        document.getElementById('password').classList.add('error-input');
+        document.getElementById('password').classList.remove('success');
         passwordErrorTxt.textContent = 'La contraseña debe tener al menos 6 caracteres';
         return false; 
     }else{
+        document.getElementById('password').classList.remove('error-input');
+        document.getElementById('password').classList.add('success');
         passwordErrorTxt.textContent = '';
         return true;
     }
@@ -42,36 +54,26 @@ function confirmarPassword(){
     let comfirmPasswordTxt = document.getElementById('confirmPassword').value;
     let confirmPasswordErrorTxt = document.getElementById('confirmPasswordError');
     if(passwordTxt.trim() !== comfirmPasswordTxt.trim()){
+        document.getElementById('confirmPassword').classList.add('error-input');
+        document.getElementById('confirmPassword').classList.remove('success');
         confirmPasswordErrorTxt.textContent = 'Las contraseñas no coinciden';
         return false;
     }else{
+        document.getElementById('confirmPassword').classList.remove('error-input');
+        document.getElementById('confirmPassword').classList.add('success');
         confirmPasswordErrorTxt.textContent = '';
         return true;
     }
 }
 
+//Agregar eventos de escucha para la validación en tiempo real
+document.getElementById('nombre').addEventListener('input', validarNombre);
+document.getElementById('email').addEventListener('input', validarEmail);
+document.getElementById('password').addEventListener('input', validarPassword);
+document.getElementById('confirmPassword').addEventListener('input', confirmarPassword);
 
 //capturar evento submit
 document.getElementById('registroForm').addEventListener('submit', function(event){
-    /*
-        Esta función recibe un argumento de tipo event
-        event es un objeto con información sobre el evento
-        este evento es de tipo submit
-    */
-
-    //detiene el comportamiento del submit
-    event.preventDefault();
-    
-    console.log("event:", event);
-    //especifica el tipo de evento
-    console.log('Tipo de evento', event.type);
-    //contiene una referencia al DOM que dispara el evento
-    console.log('Elemento currentTarget', event.currentTarget);
-    console.log('Elemento target', event.target);
-    //tiempo en milisegundos en que ocurrió el evento
-    console.log('Tiempo del evento', event.timeStamp);
-    //us booleano que indica si el evento fué iniciado por un usuario(true) o por un script(false)
-    console.log('Es confiable', event.isTrusted);
 
     let isNombreValid = validarNombre();
     let isEmailValid = validarEmail();
